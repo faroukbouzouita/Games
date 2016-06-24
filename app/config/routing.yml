@@ -1,0 +1,19 @@
+user_user:
+    resource: "@UserUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+front_end_games:
+    resource: "@FrontEndGamesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+back_end_requete_requete:
+    resource: "@BackEndRequeteRequeteBundle/Resources/config/routing.yml"
+    prefix:   /BackEND
+
+back_end_games_games:
+    resource: "@BackEndGamesGamesBundle/Resources/config/routing.yml"
+    prefix:   /BackEND
+
+app:
+    resource: @AppBundle/Controller/
+    type:     annotation

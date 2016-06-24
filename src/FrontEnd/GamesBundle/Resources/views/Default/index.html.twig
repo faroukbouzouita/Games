@@ -1,0 +1,1058 @@
+{% extends 'FrontEndGamesBundle::base.html.twig' %}
+
+{% block body %}
+  <div id="content-wrapper-parent">
+    <div id="content-wrapper">
+      <div class="container">
+        <div class="row">
+          <div id="home-slider-wrapper">
+            <div id="home-slider" class="responsive-slider hideControls">
+              <div class="slides" data-group="slides">
+                <ul>
+                  {%for j in sliders%}
+                    <li>
+                      <div class="slide-body" data-group="slide">
+                        <img  src="{{ asset('screen/others/slide-image-2.jpg') }}" alt="">
+                        <div class="caption image">
+                          <img  src="{{ asset('screen/others/slide-caption-image-2.jpg') }}" alt="">
+                        </div>
+                        <div class="caption header">
+                          <div class="heading" data-animate="slideAppearLeftToRight" data-delay="500" data-length="300">
+                            <a href="collection.html">
+                            <span class="caption-content" style="color:#47cbde">
+                              <span>{{ j.nom }} </span><br>
+                              {{ j.typejeu.type }}
+
+                            </span>
+                            </a>
+                          </div>
+                          <div class="content" data-animate="slideAppearLeftToRight" data-delay="800" data-length="300">
+                            <span class="caption-content" style="color:#ea5210">PRE-ORDER</span>
+                          <span class="caption-content" style="color:#ea5210"><br>
+                            RELEASE DATE :<span style="color:#ffffff"> {{ j.annee }}</span>
+                          </span>
+                          </div>
+                          <div class="caption1" data-animate="slideAppearRightToLeft" data-delay="1000">
+                          <span class="caption-content" style="color:#ffffff">
+                            {{ j.description }}
+                             </span>
+                          </div>
+                          <div class="slide-price">
+                          <span class="caption-content" style="color:#ea5210">
+                           {{ j.prix }} DT
+                          </span>
+                            <a href="collection.html">Details</a>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  {%endfor%}
+                </ul>
+              </div>
+              <div class="control-slideshow">
+                <span class="control">
+                  <a class="slider-control fa fa-angle-left s-prev" href="javascript:" data-jump="prev">
+                    <span class="sub-control"></span>
+                    <span class="btn-label hidden-xs">PREV</span>
+                  </a>
+                  <a class="slider-control fa fa-angle-right s-next" href="javascript:" data-jump="next">
+                    <span class="sub-control"></span>
+                    <span class="btn-label hidden-xs">NEXT</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="content" class="container clearfix">
+        <section class="row content">
+          <div id="col-main" class="clearfix">
+
+            <script type="text/javascript">
+              jQuery(document).ready(function($){
+
+                initTabActive();
+
+                //  When user clicks on tab, this code will be executed
+                $(".head_tabs").on(clickEv, function() {
+
+                  if(!$(this).parent().hasClass('active')) {
+                    //  First remove class "active" from currently active tab
+                    $(".head_tabs").parent().removeClass("active");
+
+                    //  Here we get the data-src(parent) value of the selected tab
+                    var $src_tab = $(this).attr("data-src");
+
+                    //  Now add class "active" to the selected/clicked tab
+                    $($src_tab).parent().addClass("active");
+
+                    //  Hide all tab content
+                    $(".content_tabs").hide();
+
+
+                    //  Here we get the href value of the selected tab
+                    var $selected_tab = $(this).attr("href");
+
+                    //  Show the selected tab content
+                    if(isMobile.any())
+                      $($selected_tab).show();
+                    else
+                      $($selected_tab).fadeIn();
+
+                    // Scroll to content
+                    $('html, body').animate({
+                      scrollTop: $($selected_tab).offset().top - 80
+                    },300);
+
+                    // re-call position quickshop
+                    positionQuickshop();
+
+                    //  Here we get the href value of the selected tab
+                    var $selected_carousel = $(this).attr("data-crs");
+
+                  }
+                  //  At the end, we add return false so that the click on the link is not executed
+                  return false;
+                });
+
+                /* Function: init item active */
+                function initTabActive(){
+                  // Content
+                  jQuery('#tabs_content_container').find('.content_tabs').first().show();
+                  jQuery('#tabs_content_container').find('.content_tabs').first().prev().addClass('active');
+
+
+                  jQuery('#tabs_container #tabs').find('.head_tabs').first().parent().addClass('active');
+
+                }
+              });
+            </script>
+            <!--home-tabs-->
+            <div id="tabs_container" class="visible-md visible-lg clearfix">
+              <ul id="tabs" class="list-unstyled">
+                <li class="active">
+                  <a class="head_tab2 head_tabs" href="#content_tab2" data-src=".head_tab2" data-crs="#carousel_tab2">
+                    All systems
+                  </a>
+                </li>
+                <li class="">
+                  <a class="head_tab3 head_tabs" href="#content_tab3" data-src=".head_tab3" data-crs="#carousel_tab3">
+                    PlayStation 3
+                  </a>
+                </li>
+                <li class="">
+                  <a class="head_tab4 head_tabs" href="#content_tab4" data-src=".head_tab4" data-crs="#carousel_tab4">
+                    PlayStation 4
+                  </a>
+                </li>
+                <li class="">
+                  <a class="head_tab5 head_tabs" href="#content_tab5" data-src=".head_tab5" data-crs="#carousel_tab5">
+                    Xbox 360
+                  </a>
+                </li>
+
+                <li class="">
+                  <a class="head_tab7 head_tabs" href="#content_tab7" data-src=".head_tab7" data-crs="#carousel_tab7">
+                    WII
+                  </a>
+                </li>
+
+
+
+
+              </ul>
+            </div>
+
+            <div id="tabs_content_container" class="col-md-24">
+
+              <h3 class="hidden-md hidden-lg">
+                <a class="head_tab2 head_tabs" href="#content_tab2" data-src=".head_tab2" data-crs="#carousel_tab2">All systems</a>
+              </h3>
+
+              <div id="content_tab2" class="content_tabs list_carousel responsive" style="display:none">
+                <ul id="carousel_tab2" data-prev="#prev_tab2" data-next="#next_tab2" class="list-unstyled clearfix">
+                  {# {%for j in jeu1%}#}
+                  {% for i in 0..1 %}
+
+
+
+                    {#{% endfor %}#}
+                    {#{% if jeu1.getTotalItemCount > i %}#}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{jeu1[i].nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{jeu1[i].typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{jeu1[i].prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+                    {#{%endif %}#}
+                    {#{% if jeu2.getTotalItemCount > i %}#}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{jeu2[i].nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{jeu2[i].typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{jeu2[i].prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+                    {#{%endif %}#}
+                    {#{% if jeu3.getTotalItemCount > i %}#}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{jeu3[i].nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{jeu3[i].typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{jeu3[i].prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+                    {#{%endif %}#}
+                    {#{% if jeu4.getTotalItemCount > i %}#}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{jeu4[i].nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{jeu4[i].typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{jeu4[i].prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+                    {#{%endif %}#}
+                  {% endfor %}
+                  <li class="col-md-4 items">
+                  <a class="btn btn-next" href="#" >Plus de jeux</a>
+                  </li>
+                </ul>
+                <div class="line"></div>
+                <div class="clearfix"></div>
+              </div>
+
+              <h3 class="hidden-md hidden-lg">
+                <a class="head_tab3 head_tabs" href="#content_tab3" data-src=".head_tab3" data-crs="#carousel_tab3">Xbox 360</a>
+              </h3>
+              <div id="content_tab3" class="content_tabs list_carousel responsive" style="display:none;">
+                <ul id="carousel_tab3" data-prev="#prev_tab3" data-next="#next_tab3" class="list-unstyled clearfix">
+                  {%for j in jeu1%}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{j.nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{j.typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{j.prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+
+                  {%endfor%}
+                  <li class="col-md-4 items">
+                    <a class="btn btn-next" href="{{ path('front_end_games_byplateforme',{'id': 1 }) }}">Plus de jeux</a>
+                  </li>
+                </ul>
+                <div class="line"></div>
+                <div class="clearfix"></div>
+              </div>
+              <h3 class="hidden-md hidden-lg">
+                <a class="head_tab4 head_tabs" href="#content_tab4" data-src=".head_tab4" data-crs="#carousel_tab4">PlayStation 3</a>
+              </h3>
+              <div id="content_tab4" class="content_tabs list_carousel responsive" style="display:none">
+
+                <ul id="carousel_tab4" data-prev="#prev_tab4" data-next="#next_tab4" class="list-unstyled clearfix">
+                  {%for j in jeu2%}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{j.nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{j.typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{j.prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+
+                  {%endfor%}
+                  <li class="col-md-4 items">
+                    <a class="btn btn-next" href="#" >Plus de jeux</a>
+                  </li>
+                </ul>
+                <div class="line"></div>
+                <div class="clearfix"></div>
+              </div>
+              <h3 class="hidden-md hidden-lg">
+                <a class="head_tab5 head_tabs" href="#content_tab5" data-src=".head_tab5" data-crs="#carousel_tab5">Wii</a>
+              </h3>
+              <div id="content_tab5" class="content_tabs list_carousel responsive" style="display:none">
+                <ul id="carousel_tab5" data-prev="#prev_tab5" data-next="#next_tab5" class="list-unstyled clearfix">
+                  {%for j in jeu3%}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{j.nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{j.typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{j.prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+
+                  {%endfor%}
+                  <li class="col-md-4 items">
+                    <a class="btn btn-next" href="#" >Plus de jeux</a>
+                  </li>
+                </ul>
+                <div class="line"></div>
+                <div class="clearfix"></div>
+              </div>
+
+
+              <h3 class="hidden-md hidden-lg">
+                <a class="head_tab7 head_tabs" href="#content_tab7" data-src=".head_tab7" data-crs="#carousel_tab7">PSP</a>
+              </h3>
+              <div id="content_tab7" class="content_tabs list_carousel responsive" style="display:none">
+                <ul id="carousel_tab7" data-prev="#prev_tab7" data-next="#next_tab7" class="list-unstyled clearfix">
+                  {%for j in jeu4%}
+                    <li class="col-md-4 items">
+                      <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                        <ul class="row-container list-unstyled clearfix">
+                          <li class="row-left">
+                            <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                              <div class="product-ajax-cart hidden-phone">
+                                <span class="overlay_mask"></span>
+                                <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                  Quickshop
+
+                                </div>
+                              </div>
+                            </a>
+                          </li>
+                          <li class="row-right text-left parent-fly animMix">
+                            <div class="group_info">
+                              <a class="title-5" href="product.html">  {{j.nom}}</a>
+                              <br>
+                              <a class="col-title" href="collection.html">
+                                {{j.typeJeu.type}}
+                              </a>
+                              <p class="hidden-list">
+                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                              </p>
+                              <div class="product-price">
+                              <span class="price">
+                                <span class="money">   {{j.prix}} </span>DT
+                              </span>
+                              </div>
+                              <div class="hide clearfix">
+                                <select name="id">
+                                  <option selected="selected" value="456848705">adventure - €59.00</option>
+                                  <option value="502622237">horror - €60.00</option>
+                                </select>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </form>
+
+                    </li>
+
+                  {%endfor%}
+
+                </ul>
+                <div class="line"></div>
+                <div class="clearfix"></div>
+              </div>
+              <h3 class="hidden-md hidden-lg">
+                <a class="head_tab8 head_tabs" href="#content_tab8" data-src=".head_tab8" data-crs="#carousel_tab8">PC</a>
+              </h3>
+              <div id="content_tab8" class="content_tabs list_carousel responsive" style="display:none">
+                <ul id="carousel_tab8" data-prev="#prev_tab8" data-next="#next_tab8" class="list-unstyled clearfix">
+                  <li class="col-md-4 items">
+                    <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                      <ul class="row-container list-unstyled clearfix">
+                        <li class="row-left">
+                          <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_01_large.jpg" class="image-fly img-responsive" alt="Auctor semper">
+                            </span>
+                            <div class="product-ajax-cart hidden-phone">
+                              <span class="overlay_mask"></span>
+                              <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                Quickshop
+
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="row-right text-left parent-fly animMix">
+                          <div class="group_info">
+                            <a class="title-5" href="product.html">Auctor semper</a>
+                            <br>
+                            <a class="col-title" href="collection.html">
+                              PC
+                            </a>
+                            <p class="hidden-list">
+                              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                            </p>
+                            <div class="product-price">
+                              <span class="price">
+                                <span class="money">€59.00</span>
+                              </span>
+                            </div>
+                            <div class="hide clearfix">
+                              <select name="id">
+                                <option selected="selected" value="456848705">adventure - €59.00</option>
+                                <option value="502622237">horror - €60.00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </li>
+                  <li class="col-md-4 items">
+                    <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                      <ul class="row-container list-unstyled clearfix">
+                        <li class="row-left">
+                          <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_02_large.jpg" class="image-fly img-responsive" alt="Cras in nunc non ipsum duo  cursus ultrices">
+                            </span>
+                            <div class="product-ajax-cart hidden-phone">
+                              <span class="overlay_mask"></span>
+                              <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                Quickshop
+
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="row-right text-left parent-fly animMix">
+                          <div class="group_info">
+                            <a class="title-5" href="product.html">Cras in nunc non ipsum duo cursus ultrices</a>
+                            <br>
+                            <a class="col-title" href="collection.html">
+                              PC
+                            </a>
+                            <p class="hidden-list">
+                              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                            </p>
+                            <div class="product-price">
+                              <span class="price">
+                                <span class="money">€59.00</span>
+                              </span>
+                            </div>
+                            <div class="hide clearfix">
+                              <select name="id">
+                                <option selected="selected" value="455695565">martial - €59.00</option>
+                                <option value="502624265">animation - €65.00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </li>
+                  <li class="col-md-4 items">
+                    <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                      <ul class="row-container list-unstyled clearfix">
+                        <li class="row-left">
+                          <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_03_large.jpg" class="image-fly img-responsive" alt="Curabitur mattis tellus rutrum enim facilisis">
+                            </span>
+                            <div class="product-ajax-cart hidden-phone">
+                              <span class="overlay_mask"></span>
+                              <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                Quickshop
+
+                              </div>
+                            </div>
+                            <span class="sale_banner animated">
+                              <img src="assets/images/saleoff.png" title="Sale Off" alt="Sale Off">
+                            </span>
+                          </a>
+                        </li>
+                        <li class="row-right text-left parent-fly animMix">
+                          <div class="group_info">
+                            <a class="title-5" href="product.html">Curabitur mattis tellus rutrum enim facilisis</a>
+                            <br>
+                            <a class="col-title" href="collection.html">
+                              PC
+                            </a>
+                            <p class="hidden-list">
+                              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                            </p>
+                            <div class="product-price">
+                              <del class="price_compare"> <span class="money">€69.00</span></del>
+                              <span class="price_sale"><span class="money">€59.00</span></span>
+                            </div>
+                            <div class="hide clearfix">
+                              <select name="id">
+                                <option selected="selected" value="455695609">Ferrari / Modern - €59.00</option>
+                                <option value="502625841">Lamborghini / Modern - €70.00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </li>
+                  <li class="col-md-4 items">
+                    <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                      <ul class="row-container list-unstyled clearfix">
+                        <li class="row-left">
+                          <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_04_large.jpg" class="image-fly img-responsive" alt="Curabitur sollicitudin">
+                            </span>
+                            <div class="product-ajax-cart hidden-phone">
+                              <span class="overlay_mask"></span>
+                              <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                Quickshop
+
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="row-right text-left parent-fly animMix">
+                          <div class="group_info">
+                            <a class="title-5" href="product.html">Curabitur sollicitudin</a>
+                            <br>
+                            <a class="col-title" href="collection.html">
+                              PC
+                            </a>
+                            <p class="hidden-list">
+                              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                            </p>
+                            <div class="product-price">
+                              <span class="price">
+                                <span class="money">€59.00</span>
+                              </span>
+                            </div>
+                            <div class="hide clearfix">
+                              <select name="id">
+                                <option selected="selected" value="455695597">animation - €59.00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </li>
+                  <li class="col-md-4 items">
+                    <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                      <ul class="row-container list-unstyled clearfix">
+                        <li class="row-left">
+                          <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_05_large.jpg" class="image-fly img-responsive" alt="Nam at lectus eget mi vista  hendrerit tincidunt">
+                            </span>
+                            <div class="product-ajax-cart hidden-phone">
+                              <span class="overlay_mask"></span>
+                              <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                Quickshop
+
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="row-right text-left parent-fly animMix">
+                          <div class="group_info">
+                            <a class="title-5" href="product.html">Nam at lectus eget mi vista hendrerit tincidunt</a>
+                            <br>
+                            <a class="col-title" href="collection.html">
+                              PC
+                            </a>
+                            <p class="hidden-list">
+                              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                            </p>
+                            <div class="product-price">
+                              <span class="price">
+                                <span class="money">€59.00</span>
+                              </span>
+                            </div>
+                            <div class="hide clearfix">
+                              <select name="id">
+                                <option selected="selected" value="455695573">action - €59.00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </li>
+                  <li class="col-md-4 items">
+                    <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                      <ul class="row-container list-unstyled clearfix">
+                        <li class="row-left">
+                          <a href="product.html" class="hoverBorder">
+                            <span class="hoverBorderWrapper">
+                              <img src="screen/products/product_08_large.jpg" class="image-fly img-responsive" alt="Suspendisse sed libero consequat">
+                            </span>
+                            <div class="product-ajax-cart hidden-phone">
+                              <span class="overlay_mask"></span>
+                              <div data-href="./ajax/_product-qs.html" data-target="#quick-shop-modal" class="btn btn-3 quick_shop" data-toggle="modal">
+                                Quickshop
+
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="row-right text-left parent-fly animMix">
+                          <div class="group_info">
+                            <a class="title-5" href="product.html">Suspendisse sed libero consequat</a>
+                            <br>
+                            <a class="col-title" href="collection.html">
+                              PC
+                            </a>
+                            <p class="hidden-list">
+                              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius...
+                            </p>
+                            <div class="product-price">
+                              <span class="price">
+                                <span class="money">€59.00</span>
+                              </span>
+                            </div>
+                            <div class="hide clearfix">
+                              <select name="id">
+                                <option selected="selected" value="455708809">war - €59.00</option>
+                              </select>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </form>
+                  </li>
+                </ul>
+                <div class="line"></div>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            <!--end home-tabs-->
+
+            <!--home-platforms-->
+            {#<!--end home-platforms-->#}
+
+            <span class="line"></span>
+
+            <!--home-block-->
+            {#<!--end home-block-->#}
+
+            <div id="home-platforms"></div>
+            <div id="home-block"></div>
+            <!--feature product-->
+            <div class="container  hidden-xs" >
+              <div class="col-md-8 control-group clearfix">
+                <div class="sb-title" style="color:#59a73b;font-size: 14px;
+    font-weight: bold;
+    padding-left: 20px;">BEST PlayStation 3 Games</div>
+              </div>
+              <div class="col-md-8 control-group clearfix">
+                <div class="sb-title" style="color:#a32d0a;font-size: 14px;
+    font-weight: bold;
+    padding-left: 20px;">BEST PlayStation 4 Games</div>
+              </div>
+              <div class="col-md-8 control-group clearfix">
+                <div class="sb-title" style="color:#3ba8b6;font-size: 14px;
+    font-weight: bold;
+    padding-left: 20px;">BEST Xbox 360 Games</div>
+              </div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="home_products col-md-8 not-animated clearfix" data-animate="fadeInUp" data-delay="300">
+                  <div class="control-group visible-xs">
+                    <div class="sb-title header_home_products row" style="color:#59a73b">BEST PlayStation 3 Games</div>
+                  </div>
+                  <div class="home_products_wrapper">
+                    <div id="home_products_1" class="clearfix">
+                      {% set foo = 0 %}
+
+                      {%for j in jeubest1%}
+                        {% set foo = foo+300 %}
+
+                        <div class="section-item not-animated" data-animate="bounceIn" data-delay="{{foo}}">
+                          <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                            <ul class="row-container list-unstyled clearfix">
+                              <li class="col-md-5 row-left">
+                                <a href="product.html" class="hoverBorder">
+                                <span class="hoverBorderWrapper">
+                                  <img src="screen/products/product_02_small.jpg" class="image-fly img-responsive" alt="Cras in nunc non ipsum duo  cursus ultrices">
+                                </span>
+                                </a>
+                              </li>
+                              <li class="col-md-19 row-right parent-fly">
+                                <div class="fprod-title"><a href="product.html">Cras in nunc non ipsum duo cursus ultrices</a></div>
+                                <a class="col-title" href="collection.html">
+                                  XBOX 360
+                                </a>
+                                <div class="product-price">
+                                <span class="price">
+                                  <span class="money">€59.00</span>
+                                </span>
+                                </div>
+                                <div class="hide clearfix">
+                                  <select name="id">
+                                    <option selected="selected" value="455695565">martial - €59.00</option>
+                                    <option value="502624265">animation - €65.00</option>
+                                  </select>
+                                </div>
+                              </li>
+                            </ul>
+                          </form>
+                        </div>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+                <div class="home_products col-md-8 not-animated clearfix" data-animate="fadeInUp" data-delay="300">
+                  <div class="control-group visible-xs">
+                    <div class="sb-title header_home_products row" style="color:#a32d0a">PlayStation 4 Games</div>
+                  </div>
+                  <div class="home_products_wrapper">
+                    <div id="home_products_2" class="clearfix">
+                      {% set foo = 0 %}
+
+                      {%for j in jeubest2%}
+                        {% set foo = foo+300 %}
+
+                        <div class="section-item not-animated" data-animate="bounceIn" data-delay="{{foo}}">
+                          <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                            <ul class="row-container list-unstyled clearfix">
+                              <li class="col-md-5 row-left">
+                                <a href="product.html" class="hoverBorder">
+                                <span class="hoverBorderWrapper">
+                                  <img src="screen/products/product_02_small.jpg" class="image-fly img-responsive" alt="Cras in nunc non ipsum duo  cursus ultrices">
+                                </span>
+                                </a>
+                              </li>
+                              <li class="col-md-19 row-right parent-fly">
+                                <div class="fprod-title"><a href="product.html">Cras in nunc non ipsum duo cursus ultrices</a></div>
+                                <a class="col-title" href="collection.html">
+                                  XBOX 360
+                                </a>
+                                <div class="product-price">
+                                <span class="price">
+                                  <span class="money">€59.00</span>
+                                </span>
+                                </div>
+                                <div class="hide clearfix">
+                                  <select name="id">
+                                    <option selected="selected" value="455695565">martial - €59.00</option>
+                                    <option value="502624265">animation - €65.00</option>
+                                  </select>
+                                </div>
+                              </li>
+                            </ul>
+                          </form>
+                        </div>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+                <div class="home_products col-md-8 not-animated clearfix" data-animate="fadeInUp" data-delay="300">
+                  <div class="control-group visible-xs">
+                    <div class="sb-title header_home_products row" style="color:#3ba8b6">XBOX Games</div>
+                  </div>
+                  <div class="home_products_wrapper">
+                    <div id="home_products_3" class="clearfix">
+                      {% set foo = 0 %}
+
+                      {%for j in jeubest3%}
+                        {% set foo = foo+300 %}
+
+                        <div class="section-item not-animated" data-animate="bounceIn" data-delay="{{foo}}">
+                          <form action="http://demo.designshopify.com/cart/add" method="post" enctype="multipart/form-data">
+                            <ul class="row-container list-unstyled clearfix">
+                              <li class="col-md-5 row-left">
+                                <a href="product.html" class="hoverBorder">
+                                <span class="hoverBorderWrapper">
+                                  <img src="screen/products/product_02_small.jpg" class="image-fly img-responsive" alt="Cras in nunc non ipsum duo  cursus ultrices">
+                                </span>
+                                </a>
+                              </li>
+                              <li class="col-md-19 row-right parent-fly">
+                                <div class="fprod-title"><a href="product.html">Cras in nunc non ipsum duo cursus ultrices</a></div>
+                                <a class="col-title" href="collection.html">
+                                  XBOX 360
+                                </a>
+                                <div class="product-price">
+                                <span class="price">
+                                  <span class="money">€59.00</span>
+                                </span>
+                                </div>
+                                <div class="hide clearfix">
+                                  <select name="id">
+                                    <option selected="selected" value="455695565">martial - €59.00</option>
+                                    <option value="502624265">animation - €65.00</option>
+                                  </select>
+                                </div>
+                              </li>
+                            </ul>
+                          </form>
+                        </div>
+                      {%endfor%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end feature product-->
+
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

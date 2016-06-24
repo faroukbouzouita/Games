@@ -1,0 +1,12 @@
+front_end_games_homepage:
+    path:     /
+    defaults: { _controller: FrontEndGamesBundle:Default:index }
+front_end_games_byplateforme:
+    path:     /Plateforme/{id}
+    defaults: { _controller: FrontEndGamesBundle:Default:ByPlateforme }
+front_end_games_ajouterpannier:
+    path:     /pannier/{id}
+    defaults: { _controller: FrontEndGamesBundle:Default:ajouterPannier }
+front_end_games_showpannier:
+    path:     /showpannier
+    defaults: { _controller: FrontEndGamesBundle:Default:showpannier }
